@@ -17,7 +17,23 @@ namespace Cinema_World.Data
             });
             modelBuilder.Entity<Actor_CinematographyModel>().HasOne(c => c.Cinematography).WithMany(ac => ac.Actors_Cinematography).HasForeignKey(c => c.CinematographyID);
             modelBuilder.Entity<Actor_CinematographyModel>().HasOne(c => c.Actor).WithMany(ac => ac.Actors_Cinematography).HasForeignKey(c => c.ActorID);
-            
+
+            modelBuilder.Entity<CinematographyCategory_CinematographyModel>().HasKey(cc => new
+            {
+                cc.CinematographyCategoryID,
+                cc.CinematographyID
+            });
+            modelBuilder.Entity<CinematographyCategory_CinematographyModel>().HasOne(c => c.Cinematography).WithMany(cc => cc.CinematographyCategories_Cinematography).HasForeignKey(c => c.CinematographyID);
+            modelBuilder.Entity<CinematographyCategory_CinematographyModel>().HasOne(c => c.Category).WithMany(cc => cc.CinematographyCategories_Cinematography).HasForeignKey(c => c.CinematographyCategoryID);
+
+            modelBuilder.Entity<Writer_CinematographyModel>().HasKey(wc => new
+            {
+                wc.WriterID,
+                wc.CinematographyID
+            });
+            modelBuilder.Entity<Writer_CinematographyModel>().HasOne(c => c.Cinematography).WithMany(cc => cc.Writers_Cinematography).HasForeignKey(c => c.CinematographyID);
+            modelBuilder.Entity<Writer_CinematographyModel>().HasOne(c => c.Writer).WithMany(cc => cc.Writers_Cinematography).HasForeignKey(c => c.WriterID);
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -25,7 +41,12 @@ namespace Cinema_World.Data
         public DbSet<CinematographyModel> Cinematography { get; set; }
         public DbSet<WriterModel> Writers { get; set; }
         public DbSet<DirectorModel> Directors { get; set; }
-        public DbSet<Actor_CinematographyModel> Actor_Cinematographys { get; set; }
+        public DbSet<CinematographyGenreModel> CinematographyGenres { get; set; }
+        public DbSet<CinematographyCategoryModel> CinematographyCategories { get; set; }
+        public DbSet<Actor_CinematographyModel> Actors_Cinematography { get; set; }
+        public DbSet<CinematographyCategory_CinematographyModel> CinematographyCategories_Cinematography { get; set; }
+        public DbSet<Writer_CinematographyModel> Writers_Cinematography { get; set; }
+
 
     }
 }

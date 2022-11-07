@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinema_World.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221103235438_Initial")]
-    partial class Initial
+    [Migration("20221107210122_TypoFix_Writers_Cinematography")]
+    partial class TypoFix_Writers_Cinematography
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace Cinema_World.Migrations
 
                     b.HasIndex("CinematographyID");
 
-                    b.ToTable("Actor_Cinematographys");
+                    b.ToTable("Actors_Cinematography");
                 });
 
             modelBuilder.Entity("Cinema_World.Models.ActorModel", b =>
@@ -46,6 +46,10 @@ namespace Cinema_World.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActorID"), 1L, 1);
+
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
@@ -58,13 +62,58 @@ namespace Cinema_World.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ActorID");
 
                     b.ToTable("Actors");
+                });
+
+            modelBuilder.Entity("Cinema_World.Models.CinematographyCategory_CinematographyModel", b =>
+                {
+                    b.Property<int>("CinematographyCategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CinematographyID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CinematographyCategoryID", "CinematographyID");
+
+                    b.HasIndex("CinematographyID");
+
+                    b.ToTable("CinematographyCategories_Cinematography");
+                });
+
+            modelBuilder.Entity("Cinema_World.Models.CinematographyCategoryModel", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("CinematographyCategories");
+                });
+
+            modelBuilder.Entity("Cinema_World.Models.CinematographyGenreModel", b =>
+                {
+                    b.Property<int>("GenreID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenreID"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GenreID");
+
+                    b.ToTable("CinematographyGenres");
                 });
 
             modelBuilder.Entity("Cinema_World.Models.CinematographyModel", b =>
@@ -75,14 +124,14 @@ namespace Cinema_World.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CinematographyID"), 1L, 1);
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
                     b.Property<int>("DirectorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Genre")
+                    b.Property<int>("GenreID")
                         .HasColumnType("int");
+
+                    b.Property<double>("IMDbScore")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -95,14 +144,11 @@ namespace Cinema_World.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WriterID")
-                        .HasColumnType("int");
-
                     b.HasKey("CinematographyID");
 
                     b.HasIndex("DirectorID");
 
-                    b.HasIndex("WriterID");
+                    b.HasIndex("GenreID");
 
                     b.ToTable("Cinematography");
                 });
@@ -115,6 +161,10 @@ namespace Cinema_World.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DirectorID"), 1L, 1);
 
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
 
@@ -126,15 +176,24 @@ namespace Cinema_World.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MoviesDirected")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeriesDirected")
-                        .HasColumnType("int");
-
                     b.HasKey("DirectorID");
 
                     b.ToTable("Directors");
+                });
+
+            modelBuilder.Entity("Cinema_World.Models.Writer_CinematographyModel", b =>
+                {
+                    b.Property<int>("WriterID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CinematographyID")
+                        .HasColumnType("int");
+
+                    b.HasKey("WriterID", "CinematographyID");
+
+                    b.HasIndex("CinematographyID");
+
+                    b.ToTable("Writers_Cinematography");
                 });
 
             modelBuilder.Entity("Cinema_World.Models.WriterModel", b =>
@@ -145,6 +204,10 @@ namespace Cinema_World.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WriterID"), 1L, 1);
 
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
 
@@ -155,12 +218,6 @@ namespace Cinema_World.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MoviesWritten")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeriesWritten")
-                        .HasColumnType("int");
 
                     b.HasKey("WriterID");
 
@@ -186,6 +243,25 @@ namespace Cinema_World.Migrations
                     b.Navigation("Cinematography");
                 });
 
+            modelBuilder.Entity("Cinema_World.Models.CinematographyCategory_CinematographyModel", b =>
+                {
+                    b.HasOne("Cinema_World.Models.CinematographyCategoryModel", "Category")
+                        .WithMany("CinematographyCategories_Cinematography")
+                        .HasForeignKey("CinematographyCategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cinema_World.Models.CinematographyModel", "Cinematography")
+                        .WithMany("CinematographyCategories_Cinematography")
+                        .HasForeignKey("CinematographyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Cinematography");
+                });
+
             modelBuilder.Entity("Cinema_World.Models.CinematographyModel", b =>
                 {
                     b.HasOne("Cinema_World.Models.DirectorModel", "Director")
@@ -194,13 +270,32 @@ namespace Cinema_World.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cinema_World.Models.WriterModel", "Writer")
+                    b.HasOne("Cinema_World.Models.CinematographyGenreModel", "Genre")
                         .WithMany("Cinematography")
-                        .HasForeignKey("WriterID")
+                        .HasForeignKey("GenreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Director");
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("Cinema_World.Models.Writer_CinematographyModel", b =>
+                {
+                    b.HasOne("Cinema_World.Models.CinematographyModel", "Cinematography")
+                        .WithMany("Writers_Cinematography")
+                        .HasForeignKey("CinematographyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cinema_World.Models.WriterModel", "Writer")
+                        .WithMany("Writers_Cinematography")
+                        .HasForeignKey("WriterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cinematography");
 
                     b.Navigation("Writer");
                 });
@@ -210,9 +305,23 @@ namespace Cinema_World.Migrations
                     b.Navigation("Actors_Cinematography");
                 });
 
+            modelBuilder.Entity("Cinema_World.Models.CinematographyCategoryModel", b =>
+                {
+                    b.Navigation("CinematographyCategories_Cinematography");
+                });
+
+            modelBuilder.Entity("Cinema_World.Models.CinematographyGenreModel", b =>
+                {
+                    b.Navigation("Cinematography");
+                });
+
             modelBuilder.Entity("Cinema_World.Models.CinematographyModel", b =>
                 {
                     b.Navigation("Actors_Cinematography");
+
+                    b.Navigation("CinematographyCategories_Cinematography");
+
+                    b.Navigation("Writers_Cinematography");
                 });
 
             modelBuilder.Entity("Cinema_World.Models.DirectorModel", b =>
@@ -222,7 +331,7 @@ namespace Cinema_World.Migrations
 
             modelBuilder.Entity("Cinema_World.Models.WriterModel", b =>
                 {
-                    b.Navigation("Cinematography");
+                    b.Navigation("Writers_Cinematography");
                 });
 #pragma warning restore 612, 618
         }
