@@ -10,8 +10,7 @@ namespace Cinema_World.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int BirthYear { get; set; }
-        public int MoviesDirected { get; set; }
-        public int SeriesDirected { get; set; }
+        public string BirthPlace { get; set; }
 
         public List<CinematographyModel> Cinematography { get; set; }
     }

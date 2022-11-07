@@ -1,5 +1,4 @@
-﻿using Cinema_World.Data.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cinema_World.Models
@@ -11,17 +10,18 @@ namespace Cinema_World.Models
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public CinematographyCategory Category { get; set; }
-        public CinematographyGenre Genre { get; set; }
-
+        public double IMDbScore { get; set; }
+ 
         public List<Actor_CinematographyModel> Actors_Cinematography { get; set; }
+        public List<Writer_CinematographyModel> Writers_Cinematography { get; set; }
+        public List<CinematographyCategory_CinematographyModel> CinematographyCategories_Cinematography { get; set; }
 
         public int DirectorID { get; set; }
         [ForeignKey("DirectorID")]
         public DirectorModel Director { get; set; }
 
-        public int WriterID { get; set; }
-        [ForeignKey("WriterID")]
-        public WriterModel Writer { get; set; }
+        public int GenreID { get; set; }
+        [ForeignKey("GenreID")]
+        public CinematographyGenreModel Genre { get; set; }
     }
 }
