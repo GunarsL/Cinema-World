@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,7 +15,8 @@ namespace Cinema_World.Migrations
                     ActorID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -58,6 +58,7 @@ namespace Cinema_World.Migrations
                     DirectorID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -74,6 +75,7 @@ namespace Cinema_World.Migrations
                     WriterID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -91,7 +93,7 @@ namespace Cinema_World.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReleaseYear = table.Column<int>(type: "int", nullable: false),
                     IMDbScore = table.Column<double>(type: "float", nullable: false),
                     DirectorID = table.Column<int>(type: "int", nullable: false),
                     GenreID = table.Column<int>(type: "int", nullable: false)
@@ -162,7 +164,7 @@ namespace Cinema_World.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Writers_Cinematographys",
+                name: "Writers_Cinematography",
                 columns: table => new
                 {
                     WriterID = table.Column<int>(type: "int", nullable: false),
@@ -170,15 +172,15 @@ namespace Cinema_World.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Writers_Cinematographys", x => new { x.WriterID, x.CinematographyID });
+                    table.PrimaryKey("PK_Writers_Cinematography", x => new { x.WriterID, x.CinematographyID });
                     table.ForeignKey(
-                        name: "FK_Writers_Cinematographys_Cinematography_CinematographyID",
+                        name: "FK_Writers_Cinematography_Cinematography_CinematographyID",
                         column: x => x.CinematographyID,
                         principalTable: "Cinematography",
                         principalColumn: "CinematographyID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Writers_Cinematographys_Writers_WriterID",
+                        name: "FK_Writers_Cinematography_Writers_WriterID",
                         column: x => x.WriterID,
                         principalTable: "Writers",
                         principalColumn: "WriterID",
@@ -206,8 +208,8 @@ namespace Cinema_World.Migrations
                 column: "CinematographyID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Writers_Cinematographys_CinematographyID",
-                table: "Writers_Cinematographys",
+                name: "IX_Writers_Cinematography_CinematographyID",
+                table: "Writers_Cinematography",
                 column: "CinematographyID");
         }
 
@@ -220,7 +222,7 @@ namespace Cinema_World.Migrations
                 name: "CinematographyCategories_Cinematography");
 
             migrationBuilder.DropTable(
-                name: "Writers_Cinematographys");
+                name: "Writers_Cinematography");
 
             migrationBuilder.DropTable(
                 name: "Actors");
