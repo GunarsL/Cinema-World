@@ -9,7 +9,7 @@ namespace Cinema_World.Models
         public int CinematographyID { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public int ReleaseYear { get; set; }
         public double IMDbScore { get; set; }
  
         public List<Actor_CinematographyModel> Actors_Cinematography { get; set; }
