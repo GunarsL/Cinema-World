@@ -16,6 +16,7 @@ namespace Cinema_World.Models
 
         [Display(Name = "Release year")]
         public int ReleaseYear { get; set; }
+        
         [Display(Name = "IMDb score")]
         public double IMDbScore { get; set; }
  
