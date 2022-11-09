@@ -1,0 +1,46 @@
+﻿@*Define Model*@
+
+@model IEnumerable<WriterModel>
+
+@*Define ViewData*@
+
+@{
+    ViewData["Title"] = "List of Writers";
+}
+
+@*Write code *@
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>Writer's full name</th>
+                    <th>@Html.DisplayNameFor(model => model.BirthYear)</th>
+                    <th>@Html.DisplayNameFor(model => model.BirthPlace)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="align-middle text-center">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.MiddleName) @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthPlace)
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>View</a>
+                            <a class="btn btn-outline-danger"><i class="bi bi-trash"></i>Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
