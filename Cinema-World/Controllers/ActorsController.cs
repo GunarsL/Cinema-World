@@ -1,5 +1,6 @@
 ﻿using Cinema_World.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema_World.Controllers
 {
@@ -12,10 +13,10 @@ namespace Cinema_World.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var allActors = _context.Actors.ToList();
-            return View();
+            var allActors = await _context.Actors.ToListAsync();
+            return View(allActors);
         }
     }
 }

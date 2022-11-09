@@ -16,7 +16,7 @@ namespace Cinema_World.Controllers
         public async Task<IActionResult> Index()
         {
             var allProducers = await _context.Directors.ToListAsync();
-            return View();
+            return View(allProducers);
         }
     }
 }
