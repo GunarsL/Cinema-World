@@ -7,9 +7,17 @@ namespace Cinema_World.Models
     {
         [Key]
         public int CinematographyID { get; set; }
+
+        [Display(Name = "Title")]
         public string Name { get; set; }
+
+        [Display(Name = "Description")]
         public string ShortDescription { get; set; }
+
+        [Display(Name = "Release year")]
         public int ReleaseYear { get; set; }
+        
+        [Display(Name = "IMDb score")]
         public double IMDbScore { get; set; }
  
         public List<Actor_CinematographyModel> Actors_Cinematography { get; set; }
