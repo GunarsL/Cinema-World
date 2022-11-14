@@ -8,43 +8,42 @@
     ViewData["Title"] = "Cinematography list";
 }
 
-@*Write code *@
-<div class="row">
-    <div class="col-md-8 offset-2">
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.ShortDescription)</th>
-                    <th>@Html.DisplayNameFor(model => model.ReleaseYear)</th>
-                    <th>@Html.DisplayNameFor(model => model.IMDbScore)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="align-middle text-center">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ShortDescription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReleaseYear)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IMDbScore)
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a>
-                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>View</a>
-                            <a class="btn btn-outline-danger"><i class="bi bi-trash"></i>Remove</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+@*Write code*@
+<div class="row mx-3">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @item.Name
+                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card-body">
+                            <p class="card-text">@item.ShortDescription</p>
+                            <p class="card-text"><b>Title: </b>@item.Name</p>
+                            <p class="card-text"><b>Genre: </b>@item.Genre</p>
+                            <p class="card-text"><b>Release year: </b>@item.ReleaseYear</p>
+                            <p class="card-text"><b>Categories: </b>@item.CinematographyCategories_Cinematography</p>
+                            <p class="card-text"><b>IMDb score: </b>@item.IMDbScore</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                <a class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i> Show Details</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
