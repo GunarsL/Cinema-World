@@ -34,13 +34,19 @@
                             @Html.DisplayFor(modelItem => item.BirthPlace)
                         </td>
                         <td>
-                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a>
-                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>View</a>
-                            <a class="btn btn-outline-danger"><i class="bi bi-trash"></i>Remove</a>
+                            <a class="btn btn-outline-primary" asp-controller="Directors" asp-action="Edit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i>Edit</a>
+                            <a class="btn btn-outline-info" asp-controller="Directors" asp-action="Details" asp-route-id="@item.ID"><i class="bi bi-eye"></i>Details</a>
+                            <a class="btn btn-outline-danger" asp-controller="Directors" asp-action="Delete" asp-route-id="@item.ID"><i class="bi bi-trash"></i>Delete</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="text-white pe-5 pb-5 fixed-bottom">
+    <a asp-controller="Directors" asp-action="Create" class="btn btn-success float-end">
+        <i class="bi bi-plus-circle"></i> Add New
+    </a>
 </div>

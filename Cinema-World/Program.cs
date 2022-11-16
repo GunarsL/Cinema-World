@@ -11,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IActorsService, ActorsService>();
-
+builder.Services.AddScoped<IDirectorsService, DirectorsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
