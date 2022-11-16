@@ -6,7 +6,7 @@ namespace Cinema_World.Models
     public class CinematographyModel
     {
         [Key]
-        public int CinematographyID { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Title")]
         public string Name { get; set; }

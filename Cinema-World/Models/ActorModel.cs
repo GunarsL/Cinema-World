@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿using Cinema_World.Data.Base;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Cinema_World.Models
 {
-    public class ActorModel
+    public class ActorModel : IEntityBase
     {
         [Key]
-        public int ActorID { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "First name")]
         [Required(ErrorMessage = "First name is a required field")]

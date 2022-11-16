@@ -6,7 +6,7 @@ namespace Cinema_World.Models
     {
         [Key]
 
-        public int DirectorID { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "First name")]
         public string FirstName { get; set; }

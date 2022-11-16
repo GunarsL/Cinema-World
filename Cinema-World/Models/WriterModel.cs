@@ -5,7 +5,7 @@ namespace Cinema_World.Models
     public class WriterModel
     {
         [Key]
-        public int WriterID { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "First name")]
         public string FirstName { get; set; }
