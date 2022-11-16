@@ -11,30 +11,36 @@ namespace Cinema_World.Data.Services
             _context = context;
         }
 
-        public void Add(ActorModel Actor)
+        public async Task AddAsync(ActorModel actor)
         {
-            throw new NotImplementedException();
+            await _context.Actors.AddAsync(actor);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int ActorID)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Actors.FirstOrDefaultAsync(n => n.ActorID == id);
+            _context.Actors.Remove(result);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ActorModel>> GetAll()
+        public async Task<IEnumerable<ActorModel>> GetAllAsync()
         {
             var result = await _context.Actors.ToListAsync();
             return result;
         }
 
-        public ActorModel GetById(int ActorID)
+        public async Task<ActorModel> GetByIDAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Actors.FirstOrDefaultAsync(n => n.ActorID == id);
+            return result;
         }
 
-        public ActorModel Update(int ActorID, ActorModel newActor)
+        public async Task<ActorModel> UpdateAsync(int id, ActorModel newActor)
         {
-            throw new NotImplementedException();
+            _context.Update(newActor);
+            await _context.SaveChangesAsync();
+            return newActor;
         }
     }
 }
