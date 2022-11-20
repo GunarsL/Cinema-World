@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Cinema_World.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cinema_World.Models
 {
-    public class CinematographyModel
+    public class CinematographyModel : IEntityBase
     {
         [Key]
         public int ID { get; set; }

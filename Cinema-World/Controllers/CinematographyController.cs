@@ -1,4 +1,5 @@
 ﻿using Cinema_World.Data;
+using Cinema_World.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,16 +7,16 @@ namespace Cinema_World.Controllers
 {
     public class CinematographyController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICinematographyService _service;
 
-        public CinematographyController(ApplicationDbContext context)
+        public CinematographyController(ICinematographyService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var allCinematography = await _context.Cinematography.ToListAsync();
+            var allCinematography = await _service.GetAllAsync();
             return View(allCinematography);
         }
     }
