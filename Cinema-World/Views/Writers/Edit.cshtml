@@ -1,0 +1,66 @@
+﻿@*Define Model*@
+
+@model WriterModel
+
+@*Define ViewData*@
+
+@{
+    ViewData["Title"] = "Update Writer";
+}
+
+@*Write code*@
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Update Writer!</h1>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ID" />
+
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MiddleName" class="control-label"></label>
+                        <input asp-for="MiddleName" class="form-control" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="BirthYear" class="control-label"></label>
+                        <input asp-for="BirthYear" class="form-control" />
+                        <span asp-validation-for="BirthYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="BirthPlace" class="control-label"></label>
+                        <input asp-for="BirthPlace" class="form-control" />
+                        <span asp-validation-for="BirthPlace" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-end"/>
+                        <a class="btn btn-outline-dark" asp-action="Index">Show all</a>
+                    </div>
+
+                </form> 
+
+            </div>
+        </div>
+    </div>
+</div>
