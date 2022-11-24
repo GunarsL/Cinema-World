@@ -22,6 +22,8 @@ namespace Cinema_World.Models
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Last name can be between 1 and 100 characters long!")]
         public string LastName { get; set; }
 
+        public string FullName { get { return FirstName + " " + MiddleName + " " + LastName; } }
+
         [Display(Name = "Year of Birth")]
         [Required(ErrorMessage = "Year of birth is a required field")]
         [Range(999, 9999, ErrorMessage = "Input a year between 999 and 9999")]
