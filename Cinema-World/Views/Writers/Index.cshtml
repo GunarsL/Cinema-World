@@ -45,8 +45,4 @@
     </div>
 </div>
 
-<div class="text-white pe-5 pb-5 fixed-bottom">
-    <a asp-controller="Writers" asp-action="Create" class="btn btn-success float-end">
-        <i class="bi bi-plus-circle"></i> Add New
-    </a>
-</div>
+@await Html.PartialAsync("_CreatePartial", "Writers")

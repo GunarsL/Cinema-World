@@ -1,0 +1,83 @@
+﻿@model CinematographyViewModel
+
+@{
+    ViewData["Title"] = "Create Cinematography";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Create a new Cinematography piece</h4>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ReleaseYear" class="control-label"></label>
+                                <input min="999" max="9999" asp-for="ReleaseYear" type="number" class="form-control" />
+                                <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="IMDbScore" class="control-label"></label>
+                                <input min="0" max="10" type="number" step="0.1" asp-for="IMDbScore" class="form-control" />
+                                <span asp-validation-for="IMDbScore" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="GenreID" class="control-label"></label>
+                                <select asp-for="GenreID" class="form-control" asp-items="ViewBag.Genres"></select>
+                                <span asp-validation-for="GenreID" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DirectorID" class="control-label"></label>
+                                <select asp-for="DirectorID" class="form-control" asp-items="ViewBag.Directors"></select>
+                                <span asp-validation-for="DirectorID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="CinematographyCategoryIDs" class="control-label"></label>
+                                <select asp-for="CinematographyCategoryIDs" class="form-control" size="3" asp-items="ViewBag.Categories" multiple></select>
+                                <span asp-validation-for="CinematographyCategoryIDs" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActorIDs" class="control-label"></label>
+                                <select asp-for="ActorIDs" class="form-control" size="3" asp-items="ViewBag.Actors" multiple></select>
+                                <span asp-validation-for="ActorIDs" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="WriterIDs" class="control-label"></label>
+                                <select asp-for="WriterIDs" class="form-control" size="3" asp-items="ViewBag.Writers" multiple></select>
+                                <span asp-validation-for="WriterIDs" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="ShortDescription" class="control-label"></label>
+                                <textarea asp-for="ShortDescription" class="form-control"></textarea>
+                                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-end" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

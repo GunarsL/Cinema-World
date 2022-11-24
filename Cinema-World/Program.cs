@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IActorsService, ActorsService>();
 builder.Services.AddScoped<IDirectorsService, DirectorsService>();
 builder.Services.AddScoped<IWritersService, WritersService>();
+builder.Services.AddScoped<ICinematographyService, CinematographyService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,5 +36,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 ApplicationDbInitializer.Seed(app);
+ApplicationDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 app.Run();
 
