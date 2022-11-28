@@ -23,13 +23,14 @@ namespace Cinema_World.Controllers
             return View(allCinematography);
         }
 
+
         public async Task<IActionResult> Filter(string searchString)
         {
             var allCinematography = await _service.GetAllAsync(n => n.Genre, d => d.Director);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filteredResult = allCinematography.Where(n => n.Name.Contains(searchString) || n.ShortDescription.Contains(searchString)).ToList();
+                var filteredResult = allCinematography.Where(n => n.Name.ToLower().Contains(searchString.ToLower()) || n.ShortDescription.ToLower().Contains(searchString.ToLower())).ToList();
                 return View("Index", filteredResult);
             }
             

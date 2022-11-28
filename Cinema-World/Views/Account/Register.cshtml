@@ -1,15 +1,15 @@
 ﻿@using Cinema_World.Data.ViewModels
 
-@model LoginViewModel;
+@model RegisterViewModel;
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Register";
 }
 
 <div class="row">
     <div class="col-md-6 offset-3">
         <p>
-            <h4>Log in to your account!</h4>
+            <h4>Register new account!</h4>
         </p>
 
         @if (TempData["Error"] != null)
@@ -21,9 +21,14 @@
 
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Login" method="post">
+                <form asp-action="Register" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
                         <input asp-for="Email" class="form-control" />
@@ -34,9 +39,14 @@
                         <input asp-for="Password" class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group mt-3">
-                        <input class="btn btn-outline-success float-end" type="submit" value="Log In" />
+                        <input class="btn btn-outline-success float-end" type="submit" value="Register" />
                         <a class="btn btn-outline-dark" asp-controller="Cinematography" asp-action="Index">Return to Cinematography</a>
                     </div>
                 </form>
