@@ -1,4 +1,6 @@
-﻿using Cinema_World.Models;
+﻿using Cinema_World.Data.Static;
+using Cinema_World.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Cinema_World.Data
 {
@@ -469,6 +471,54 @@ namespace Cinema_World.Data
                         }
                     });
                     context.SaveChanges();
+                }
+            }
+        }
+
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                //Role creation
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                //Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var adminUserEmail = "admin@cinemaworld.com";
+
+                //Admin
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                if(adminUser == null)
+                {
+                    var newAdminUser = new ApplicationUser()
+                    {
+                        UserName = "Admin",
+                        Email = adminUserEmail,
+                        EmailConfirmed = true,
+                    };
+                    await userManager.CreateAsync(newAdminUser, "CinemaWorld@2022");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+                //User
+                var cwUserEmail = "cwuser@cinemaworld.com";
+                var cwUser = await userManager.FindByEmailAsync(cwUserEmail);
+                if (cwUser == null)
+                {
+                    var newCwUser = new ApplicationUser()
+                    {
+                        UserName = "CW-User",
+                        Email = cwUserEmail,
+                        EmailConfirmed = true,
+                    };
+                    await userManager.CreateAsync(newCwUser, "CinemaWorld@2022");
+                    await userManager.AddToRoleAsync(newCwUser, UserRoles.User);
                 }
             }
         }
