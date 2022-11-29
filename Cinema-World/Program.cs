@@ -1,5 +1,6 @@
 using Cinema_World.Data;
 using Cinema_World.Data.Services;
+using Cinema_World.Data.ViewModels;
 using Cinema_World.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,16 @@ builder.Services.AddScoped<IDirectorsService, DirectorsService>();
 builder.Services.AddScoped<IWritersService, WritersService>();
 builder.Services.AddScoped<ICinematographyService, CinematographyService>();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        {
+            options.User.RequireUniqueEmail = true;
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = true;
+            options.Password.RequiredLength = 6;
+            options.Password.RequiredUniqueChars = 1;
+        }).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(options =>

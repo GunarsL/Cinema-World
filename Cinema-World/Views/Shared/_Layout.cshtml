@@ -30,17 +30,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Cinematography" asp-action="Index"> <i class="badge-info bi-film"></i> Cinematography</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-gear"></i> Manage
-                            </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Directors" asp-action="Index"><i class="bi bi-mortarboard"></i> Directors</a>
-                                <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-rolodex"></i> Actors</a>
-                                <a class="dropdown-item" asp-controller="Writers" asp-action="Index"><i class="bi bi-vector-pen"></i> Writers</a>
-                            </div>
-                        </li>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Manage
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Directors" asp-action="Index"><i class="bi bi-mortarboard"></i> Directors</a>
+                                    <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-rolodex"></i> Actors</a>
+                                    <a class="dropdown-item" asp-controller="Writers" asp-action="Index"><i class="bi bi-vector-pen"></i> Writers</a>
+                                </div>
+                            </li>
+                        }
+
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
@@ -54,13 +59,7 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
                     </form>
 
-                    <a class="btn btn-outline-success my-2 my-sm-0 me-3" asp-controller="Account" asp-action="Login">
-                        <i class="bi bi-box-arrow-in-right"></i> Log In
-                    </a>
-
-                    <a class="btn btn-outline-primary my-2 my-sm-0" asp-controller="Account" asp-action="Register">
-                        <i class="bi bi-person-badge"></i> Register
-                    </a>
+                    <partial name="_Identity.cshtml" />
                 </div>
             </div>
         </nav>

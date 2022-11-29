@@ -1,0 +1,82 @@
+﻿@*Define Model*@
+
+@model CinematographyModel
+
+@*Define ViewData*@
+
+@{
+    ViewData["Title"] = "Delete Cinematography piece";
+}
+
+@*Write code*@
+<div class="row mx-3">
+    <div class="col-8 ms-auto">
+        <div class="card mb-12" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info bg-gradient">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <p class="card-text">@Model.ShortDescription</p>
+                        <p class="card-text"><b>Title: </b>@Model.Name</p>
+                        <p class="card-text"><b>Genre: </b>@Model.Genre.Name</p>
+                        <p class="card-text">
+                            <hr />
+                            <div class="row">
+                                <b class="col">Categories:</b> @foreach (var category in Model.CinematographyCategories_Cinematography)
+                                {
+                                    <div class="col text-start">
+                                        @category.Category.Name
+                                    </div>
+                                }
+                            </div>
+                            <hr />
+                        </p>
+                        <p class="card-text"><b>Release year: </b>@Model.ReleaseYear</p>
+                        <p class="card-text"><b>IMDb score: </b>@Model.IMDbScore</p>
+                        <p class="card-text">
+                            <b>Director: </b>
+                            @Model.Director.FirstName @Model.Director.MiddleName @Model.Director.LastName
+                        </p>
+                        <p class="card-text">
+                            <hr />
+                            <div class="row">
+                                <b class="col">Writers:</b> @foreach (var writer in Model.Writers_Cinematography)
+                                {
+                                    <div class="row text-start pt-2 pb-2 ms-0">
+                                        @writer.Writer.FirstName @writer.Writer.MiddleName @writer.Writer.LastName
+                                    </div>
+                                }
+                            </div>
+                        </p>
+                        <p class="card-text">
+                            <hr />
+                            <div class="row">
+                                <b>Actors: </b> @foreach (var actor in Model.Actors_Cinematography)
+                                {
+                                    <div class="row text-start pt-2 pb-2 ms-0">
+                                        @actor.Actor.FirstName @actor.Actor.MiddleName @actor.Actor.LastName
+                                    </div>
+                                }
+                            </div>
+                        </p>
+                        <div class="form-group mt-2">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="ID" />
+                                <input type="submit" value="Confirm" class="btn btn-outline-danger float-end" />
+                            </form>
+                            <a class="btn btn-outline-dark float-start" asp-action="Index">Return to Cinematography</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

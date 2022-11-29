@@ -4,6 +4,7 @@ using Cinema_World.Data.ViewModels;
 using Cinema_World.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema_World.Controllers
 {
@@ -18,6 +19,12 @@ namespace Cinema_World.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+        }
+
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.ToListAsync();
+            return View(users);
         }
 
         public IActionResult Login()
@@ -81,11 +88,16 @@ namespace Cinema_World.Controllers
 
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
             if (newUserResponse.Succeeded)
-            {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-            }
 
             return View("RegisterDone");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Cinematography");
         }
     }
 }
