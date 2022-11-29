@@ -10,6 +10,7 @@ namespace Cinema_World.Controllers
 {
     public class CinematographyController : Controller
     {
+
         private readonly ICinematographyService _service;
 
         public CinematographyController(ICinematographyService service)
@@ -125,6 +126,25 @@ namespace Cinema_World.Controllers
                 return View(cinematography);
             }
             await _service.UpdateCinematographyAsync(cinematography);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var cinematographyDetails = await _service.GetCinematographyByIDAsync(id);
+            if (cinematographyDetails == null) return View("NotFound");
+            return View(cinematographyDetails);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var cinematographyDetails = await _service.GetCinematographyByIDAsync(id);
+            if (cinematographyDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+
             return RedirectToAction(nameof(Index));
         }
 

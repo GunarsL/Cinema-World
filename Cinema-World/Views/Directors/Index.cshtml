@@ -17,7 +17,11 @@
                     <th>Director's Full name</th>
                     <th>@Html.DisplayNameFor(model => model.BirthYear)</th>
                     <th>@Html.DisplayNameFor(model => model.BirthPlace)</th>
-                    <th>Actions</th>
+
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -33,11 +37,15 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BirthPlace)
                         </td>
-                        <td>
-                            <a class="btn btn-outline-primary" asp-controller="Directors" asp-action="Edit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i>Edit</a>
-                            <a class="btn btn-outline-info" asp-controller="Directors" asp-action="Details" asp-route-id="@item.ID"><i class="bi bi-eye"></i>Details</a>
-                            <a class="btn btn-outline-danger" asp-controller="Directors" asp-action="Delete" asp-route-id="@item.ID"><i class="bi bi-trash"></i>Delete</a>
-                        </td>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a class="btn btn-outline-primary" asp-controller="Directors" asp-action="Edit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i>Edit</a>
+                                <a class="btn btn-outline-info" asp-controller="Directors" asp-action="Details" asp-route-id="@item.ID"><i class="bi bi-eye"></i>Details</a>
+                                <a class="btn btn-outline-danger" asp-controller="Directors" asp-action="Delete" asp-route-id="@item.ID"><i class="bi bi-trash"></i>Delete</a>
+                            </td>
+                        }
                     </tr>
                 }
             </tbody>
