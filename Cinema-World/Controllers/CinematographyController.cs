@@ -32,6 +32,9 @@ namespace Cinema_World.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 var filteredResult = allCinematography.Where(n => n.Name.ToLower().Contains(searchString.ToLower()) || n.ShortDescription.ToLower().Contains(searchString.ToLower())).ToList();
+                
+                if(filteredResult.Count == 0) return View("NotFound");
+                
                 return View("Index", filteredResult);
             }
             
