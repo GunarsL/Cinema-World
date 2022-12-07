@@ -5,6 +5,9 @@ using Cinema_World.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
 
 namespace Cinema_World.Controllers
 {
@@ -73,10 +76,17 @@ namespace Cinema_World.Controllers
         {
             if (!ModelState.IsValid) return View(registerViewModel);
 
-            var user = await _userManager.FindByEmailAsync(registerViewModel.Email);
-            if(user != null)
+            var userMail = await _userManager.FindByEmailAsync(registerViewModel.Email);
+            if(userMail != null)
             {
                 TempData["Error"] = "Email address is unavailable";
+                return View(registerViewModel);
+            }
+
+            var userName = await _userManager.FindByNameAsync(registerViewModel.UserName);
+            if(userName != null)
+            {
+                TempData["Error"] = "Username is unavailable";
                 return View(registerViewModel);
             }
 
@@ -89,6 +99,28 @@ namespace Cinema_World.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
             if (newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+
+            using (MailMessage mail = new MailMessage("leitans.g@gmail.com", registerViewModel.Email))
+            {
+                var cwURL = "https://cinema-world.azurewebsites.net/Cinematography";
+
+                mail.Subject = "Cinema World Registration";
+                string body = "Hello " + registerViewModel.UserName + ",";
+                body += "<br /><br />Thank you for registering at Cinema World";
+                body += "<br /><a href = '" + string.Format("{0}",cwURL) + "'>Click here to browser our cinematograhy content</a>";
+                body += "<br /><br />Thank you!";
+                body += "<br />Sincerely, Cinema World team";
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential networkCredential = new NetworkCredential("leitans.g@gmail.com", "edbqzyisoangvivj");
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = networkCredential;
+                smtp.Port = 587;
+                smtp.Send(mail);
+            }
 
             return View("RegisterDone");
         }
