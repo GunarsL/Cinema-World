@@ -17,7 +17,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="profile-btn">
             <li>
-                <a class="dropdown-item" asp-controller="Profile" asp-action="Index">
+                <a class="dropdown-item" asp-controller="Account" asp-action="Profile" asp-route-id="@UserManager.GetUserId(User)">
                     <i class="bi bi-person-circle"></i> Profile
                 </a>
             </li>
