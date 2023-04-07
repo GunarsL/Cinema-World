@@ -1,6 +1,7 @@
 ﻿using Cinema_World.Data;
 using Cinema_World.Data.Services;
 using Cinema_World.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,7 @@ namespace Cinema_World.Controllers
             return View(cinematographyDetails);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             var cinematographyDropdownData = await _service.GetCinematographyDropdownValues();
@@ -62,6 +64,7 @@ namespace Cinema_World.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CinematographyViewModel cinematography)
         {
             if(!ModelState.IsValid)
@@ -80,6 +83,7 @@ namespace Cinema_World.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var cinematographyDetails = await _service.GetCinematographyByIDAsync(id);
@@ -111,6 +115,7 @@ namespace Cinema_World.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, CinematographyViewModel cinematography)
         {
             if (id != cinematography.ID) return View("NotFound");
@@ -132,6 +137,7 @@ namespace Cinema_World.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var cinematographyDetails = await _service.GetCinematographyByIDAsync(id);
@@ -141,6 +147,7 @@ namespace Cinema_World.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cinematographyDetails = await _service.GetCinematographyByIDAsync(id);

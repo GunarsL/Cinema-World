@@ -1,0 +1,45 @@
+﻿@*Define Model*@
+
+@model ApplicationUser
+
+@*Define ViewData*@
+
+@{
+    ViewData["Title"] = @Model.UserName;
+}
+
+@*Write code *@
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Details for @Model.UserName!</h1>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" readonly />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>                
+
+                <div class="form-group mt-2">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-outline-danger float-end" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    }
+                    <a class="btn btn-outline-success float-end ms-2" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    <a class="btn btn-outline-dark" asp-action="Index">Show all</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

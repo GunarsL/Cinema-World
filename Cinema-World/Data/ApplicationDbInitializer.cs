@@ -292,8 +292,8 @@ namespace Cinema_World.Data
                         },
                         new CinematographyModel()
                         {
-                            Name = "The Dark Knight",
-                            ShortDescription = "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+                            Name = "Avengers: Infinity War",
+                            ShortDescription = "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
                             ReleaseYear = 2018,
                             IMDbScore = 8.4,
                             DirectorID = 5,
@@ -301,7 +301,7 @@ namespace Cinema_World.Data
                         },
                         new CinematographyModel()
                         {
-                            Name = "Avengers: Infinity War",
+                            Name = "The Dark Knight",
                             ShortDescription = "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
                             ReleaseYear = 2008,
                             IMDbScore = 8.4,

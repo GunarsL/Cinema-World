@@ -24,6 +24,12 @@ namespace Cinema_World.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Profile(string id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            return View(user);
+        }
+
         public async Task<IActionResult> Users()
         {
             var users = await _context.Users.ToListAsync();
@@ -32,8 +38,12 @@ namespace Cinema_World.Controllers
 
         public IActionResult Login()
         {
-            var response = new LoginViewModel();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Cinematography");
+            }
 
+            var response = new LoginViewModel();
 
             return View(response);
         }
@@ -65,8 +75,12 @@ namespace Cinema_World.Controllers
 
         public IActionResult Register()
         {
-            var response = new RegisterViewModel();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Cinematography");
+            }
 
+            var response = new RegisterViewModel();
 
             return View(response);
         }

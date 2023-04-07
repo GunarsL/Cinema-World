@@ -1,6 +1,7 @@
 ﻿using Cinema_World.Data;
 using Cinema_World.Data.Services;
 using Cinema_World.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,12 +29,14 @@ namespace Cinema_World.Controllers
             return View(writerDetails);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("FirstName,MiddleName,LastName,BirthYear,BirthPlace")] WriterModel writer)
         {
             if (!ModelState.IsValid)
@@ -44,6 +47,7 @@ namespace Cinema_World.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var writerDetails = await _service.GetByIDAsync(id);
@@ -52,6 +56,7 @@ namespace Cinema_World.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, WriterModel writer)
         {
             if (!ModelState.IsValid)
@@ -62,6 +67,7 @@ namespace Cinema_World.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var writerDetails = await _service.GetByIDAsync(id);
@@ -71,6 +77,7 @@ namespace Cinema_World.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var writerDetails = await _service.GetByIDAsync(id);
