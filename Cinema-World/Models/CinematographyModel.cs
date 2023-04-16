@@ -24,6 +24,7 @@ namespace Cinema_World.Models
         public List<Actor_CinematographyModel> Actors_Cinematography { get; set; }
         public List<Writer_CinematographyModel> Writers_Cinematography { get; set; }
         public List<CinematographyCategory_CinematographyModel> CinematographyCategories_Cinematography { get; set; }
+        public List<ApplicationUser_CinematographyModel> ApplicationUser_Cinematography { get; set; }
 
         public int DirectorID { get; set; }
         [ForeignKey("DirectorID")]
