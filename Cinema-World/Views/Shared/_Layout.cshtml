@@ -30,6 +30,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Cinematography" asp-action="Index"> <i class="badge-info bi-film"></i> Cinematography</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Favorites" asp-action="MyFavorites"> <i class="bi bi-star-fill"></i> Favorites</a>
+                        </li>
 
                         @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {

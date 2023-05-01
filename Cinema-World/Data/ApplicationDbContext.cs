@@ -35,6 +35,14 @@ namespace Cinema_World.Data
             modelBuilder.Entity<Writer_CinematographyModel>().HasOne(c => c.Cinematography).WithMany(cc => cc.Writers_Cinematography).HasForeignKey(c => c.CinematographyID);
             modelBuilder.Entity<Writer_CinematographyModel>().HasOne(c => c.Writer).WithMany(cc => cc.Writers_Cinematography).HasForeignKey(c => c.WriterID);
 
+            modelBuilder.Entity<ApplicationUser_CinematographyModel>().HasKey(auc => new
+            {
+                auc.UserID,
+                auc.CinematographyID
+            });
+            modelBuilder.Entity<ApplicationUser_CinematographyModel>().HasOne(c => c.Cinematography).WithMany(cc => cc.ApplicationUser_Cinematography).HasForeignKey(c => c.CinematographyID);
+            modelBuilder.Entity<ApplicationUser_CinematographyModel>().HasOne(c => c.User).WithMany(cc => cc.ApplicationUser_Cinematography).HasForeignKey(c => c.UserID);
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -47,7 +55,7 @@ namespace Cinema_World.Data
         public DbSet<Actor_CinematographyModel> Actors_Cinematography { get; set; }
         public DbSet<CinematographyCategory_CinematographyModel> CinematographyCategories_Cinematography { get; set; }
         public DbSet<Writer_CinematographyModel> Writers_Cinematography { get; set; }
-
+        public DbSet<ApplicationUser_CinematographyModel> AspNetUserCinematography { get; set; }
 
     }
 }

@@ -22,15 +22,11 @@
                                     @item.Name
                                     @if (User.Identity.IsAuthenticated)
                                     {
-                                        @using (Html.BeginForm("AddToFavorites", "Favorites", FormMethod.Post))
+                                        @using (Html.BeginForm("RemoveFromFavorites", "Favorites", FormMethod.Post))
                                         {
                                             @Html.Hidden("cinematographyID", item.ID)
-                                            <button class="btn-lg btn-outline-warning float-end" type="submit"><i class="bi bi-star"></i></button>
+                                            <button class="btn-lg btn-outline-danger float-end" type="submit"><i class="bi bi-x-square"></i></button>
                                         }
-                                    }
-                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                    {
-                                        <a class="text-white float-start" asp-action="Edit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i></a>
                                     }
                                 </h5>
                             </p>
@@ -49,7 +45,7 @@
                     <div class="col-md-12">
                         <div class="card-footer ">
                             <p class="card-text">
-                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.ID"><i class="bi bi-eye-fill"></i> Show Details</a>
+                                <a class="btn btn-outline-primary float-right" asp-controller="Cinematography" asp-action="Details" asp-route-id="@item.ID"><i class="bi bi-eye-fill"></i> Show Details</a>
                             </p>
                         </div>
                     </div>

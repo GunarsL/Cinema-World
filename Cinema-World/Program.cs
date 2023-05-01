@@ -60,6 +60,15 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "MyFavorites",
+        pattern: "Favorites/MyFavorites/{username}",
+        defaults: new { controller = "Favorites", action = "MyFavorites" }
+    );
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

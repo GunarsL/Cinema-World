@@ -17,13 +17,14 @@ namespace Cinema_World.Models
 
         [Display(Name = "Release year")]
         public int ReleaseYear { get; set; }
-        
+
         [Display(Name = "IMDb score")]
         public double IMDbScore { get; set; }
- 
+
         public List<Actor_CinematographyModel> Actors_Cinematography { get; set; }
         public List<Writer_CinematographyModel> Writers_Cinematography { get; set; }
         public List<CinematographyCategory_CinematographyModel> CinematographyCategories_Cinematography { get; set; }
+        public List<ApplicationUser_CinematographyModel> ApplicationUser_Cinematography { get; set; }
 
         public int DirectorID { get; set; }
         [ForeignKey("DirectorID")]
