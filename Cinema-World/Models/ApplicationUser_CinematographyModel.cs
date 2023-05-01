@@ -1,4 +1,4 @@
-﻿namespace Cinema_World.Models
+namespace Cinema_World.Models
 {
     public class ApplicationUser_CinematographyModel
     {
