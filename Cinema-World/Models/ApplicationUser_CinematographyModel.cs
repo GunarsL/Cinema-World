@@ -6,5 +6,6 @@ namespace Cinema_World.Models
         public ApplicationUser User { get; set; }
         public int CinematographyID { get; set; }
         public CinematographyModel Cinematography { get; set; }
+        public DateTime UploadTime { get; set; }
     }
 }
