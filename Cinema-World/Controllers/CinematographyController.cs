@@ -93,6 +93,7 @@ namespace Cinema_World.Controllers
             {
                 ID = cinematographyDetails.ID,
                 Name = cinematographyDetails.Name,
+                Picture = cinematographyDetails.Picture,
                 ShortDescription = cinematographyDetails.ShortDescription,
                 ReleaseYear = cinematographyDetails.ReleaseYear,
                 IMDbScore = cinematographyDetails.IMDbScore,

@@ -1,10 +1,7 @@
 ﻿using Cinema_World.Data.Base;
 using Cinema_World.Data.ViewModels;
 using Cinema_World.Models;
-using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using static Bogus.DataSets.Name;
 
 namespace Cinema_World.Data.Services
 {
@@ -21,6 +18,7 @@ namespace Cinema_World.Data.Services
             var newCinematography = new CinematographyModel()
             {
                 Name = data.Name,
+                Picture = data.Picture,
                 ShortDescription = data.ShortDescription,
                 ReleaseYear = data.ReleaseYear,
                 IMDbScore = data.IMDbScore,
@@ -78,8 +76,8 @@ namespace Cinema_World.Data.Services
             var response = new CinematographyDropdownViewModel()
             {
                 Actors = await _context.Actors.OrderBy(a => a.LastName).ToListAsync(),
-                Writers = await _context.Writers.OrderBy(w => w.FirstName).ToListAsync(),
-                Directors = await _context.Directors.OrderBy(d => d.FirstName).ToListAsync(),
+                Writers = await _context.Writers.OrderBy(w => w.LastName).ToListAsync(),
+                Directors = await _context.Directors.OrderBy(d => d.LastName).ToListAsync(),
                 Categories = await _context.CinematographyCategories.OrderBy(c => c.Name).ToListAsync(),
                 Genres = await _context.CinematographyGenres.OrderBy(g => g.Name).ToListAsync()
             };
@@ -93,6 +91,7 @@ namespace Cinema_World.Data.Services
             if (dbCinematography != null)
             {
                 dbCinematography.Name = data.Name;
+                dbCinematography.Picture = data.Picture;
                 dbCinematography.ShortDescription = data.ShortDescription;
                 dbCinematography.ReleaseYear = data.ReleaseYear;
                 dbCinematography.IMDbScore = data.IMDbScore;

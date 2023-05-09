@@ -21,6 +21,9 @@ namespace Cinema_World.Models
         [Display(Name = "IMDb score")]
         public double IMDbScore { get; set; }
 
+        [Display(Name = "Picture URL")]
+        public string Picture { get; set; }
+
         public List<Actor_CinematographyModel> Actors_Cinematography { get; set; }
         public List<Writer_CinematographyModel> Writers_Cinematography { get; set; }
         public List<CinematographyCategory_CinematographyModel> CinematographyCategories_Cinematography { get; set; }

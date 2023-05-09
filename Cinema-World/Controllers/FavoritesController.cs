@@ -1,10 +1,8 @@
 ﻿using Cinema_World.Data;
 using Cinema_World.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace Cinema_World.Controllers
 {
@@ -25,10 +23,8 @@ namespace Cinema_World.Controllers
             {
                 if (!User.Identity.IsAuthenticated)
                 {
-                    // if the user is not authenticated and no username is provided, redirect to login
                     return RedirectToAction("Login", "Account");
                 }
-                // if the user is authenticated but no username is provided, use the current user's username
                 username = User.Identity.Name;
             }
 
@@ -71,7 +67,8 @@ namespace Cinema_World.Controllers
             var createFavorites = new ApplicationUser_CinematographyModel()
             {
                 CinematographyID = cinematographyID,
-                UserID = userID
+                UserID = userID,
+                UploadTime = DateTime.Now
             };
 
             _context.AspNetUserCinematography.Add(createFavorites);

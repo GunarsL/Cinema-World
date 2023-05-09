@@ -13,6 +13,11 @@ namespace Cinema_World.Models
         [StringLength(255, MinimumLength = 1, ErrorMessage = "Title can be between 1 and 255 characters long!")]
         public string Name { get; set; }
 
+        [Display(Name = "Picture URL")]
+        [Required(ErrorMessage = "Picture is required")]
+        [StringLength(999,MinimumLength = 1, ErrorMessage = "Picture code must be at least 1 character long!")]
+        public string Picture { get; set; }
+
         [Display(Name = "Description")]
         [Required(ErrorMessage = "Description is required")]
         [StringLength(255, MinimumLength = 1, ErrorMessage = "Description can be between 1 and 255 characters long!")]
