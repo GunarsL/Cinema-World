@@ -1,9 +1,44 @@
+﻿@model Cinema_World.Data.ViewModels.HomeIndexViewModel
+
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
+
 <div class="container pt-5">
     <div class="text-center">
-        <h2 class="display-5">Welcome to Cinema World - cinematography review website.</h2>
-        <p class="text-muted">Share your review, rate it and begin your journey in Cinema World!</p>
-    </div>   
+        <h2 class="display-5">Welcome to Cinema World - cinematography trove.</h2>
+        <p class="text-muted">Check out our Top 3 selection below!</p>
+    </div>
+</div>
+
+<div class="row mb-3 mx-3">
+    <h2 class="display-5 text-center mb-3">Top 3 Cinematography Items of all time</h2>
+    @foreach (var cinematography in Model.Top3AllTimeCinematography)
+    {
+        <div class="col-4">
+            <div class="card mb-3" style="max-width: 540px">
+                <img src="@cinematography.Picture" class="card-img-top" alt="@cinematography.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@cinematography.Name</h5>
+                    <p class="card-text">@cinematography.ReleaseYear</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row mx-3">
+    <h2 class="display-5 text-center mb-3">Top 3 Cinematography Items current month</h2>
+    @foreach (var cinematography in Model.Top3ThisMonthCinematography)
+    {
+        <div class="col-4">
+            <div class="card mb-3" style="max-width: 540px;">
+                <img src="@cinematography.Picture" class="card-img-top" alt="@cinematography.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@cinematography.Name</h5>
+                    <p class="card-text">@cinematography.ReleaseYear</p>
+                </div>
+            </div>
+        </div>
+    }
 </div>
