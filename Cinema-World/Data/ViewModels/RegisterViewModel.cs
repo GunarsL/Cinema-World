@@ -13,13 +13,15 @@ namespace Cinema_World.Data.ViewModels
         public string Email { get; set; }
 
         [Required]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$",
+        ErrorMessage = "Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, and one numeric digit.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name = "Confirm password")]
         [Required(ErrorMessage = "Password confirmation is required")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Password do not much")]
+        [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; }
     }
 }
