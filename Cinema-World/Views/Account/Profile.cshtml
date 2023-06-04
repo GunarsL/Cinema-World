@@ -33,8 +33,7 @@
                 <div class="form-group mt-2">
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-outline-danger float-end" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                        <a class="btn btn-outline-dark" asp-action="Index">Show all</a>
+                        <a class="btn btn-outline-dark" asp-action="Users">Show all</a>
 
                     }
                 </div>
